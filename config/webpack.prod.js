@@ -5,7 +5,6 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
-
 const path = require("path");
 const rootDir = path.resolve(__dirname, "..");
 
@@ -15,13 +14,16 @@ module.exports = webpackMerge(commonConfig, {
   output: {
     path: path.resolve(rootDir, "dist"),
     publicPath: "./",
-    filename: "[name].[contenthash].js",
-    chunkFilename: "[id].chunk.js"
+    filename: "[name].[chunkhash].js",
+    chunkFilename: "[name].[chunkhash].js"
   },
 
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({}),
+      new UglifyJsPlugin({
+        extractComments: "all",
+        parallel: true
+      }),
       new OptimizeCssAssetsPlugin({
         cssProcessor: require("cssnano"),
         cssProcessorOptions: {
@@ -29,7 +31,23 @@ module.exports = webpackMerge(commonConfig, {
             removeAll: true
           }
         },
-        canPrint: true
+        canPrint: true,
+        sourceMap: "cheap-module-source-map",
+        mangle: true,
+        beautify: false,
+        comments: false,
+        compress: {
+          unused: true,
+          dead_code: true,
+          warnings: false,
+          drop_debugger: true,
+          conditionals: true,
+          evaluate: true,
+          drop_console: true,
+          sequences: true,
+          booleans: true
+        },
+        extractComments: true
       }),
       new CompressionPlugin({
         algorithm: "gzip"

@@ -1,3 +1,15 @@
 export default {
-    count: 0
-}
+  loading: false,
+  user: {
+    loggedIn: false,
+    firstName: "",
+    lastName: "",
+    email: "",
+    token: "",
+    errorCode: null,
+    error: ""
+  },
+  posts: {
+    list: []
+  }
+};

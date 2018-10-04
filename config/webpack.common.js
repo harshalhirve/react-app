@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const devMode = process.env.NODE_ENV
   ? process.env.NODE_ENV.trim() !== "production"
   : true;
@@ -59,11 +60,13 @@ module.exports = {
         loader: "file-loader?name=public/fonts/[name].[ext]"
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|jpeg|gif|svg|tif)$/,
         use: [
           {
             loader: "file-loader",
-            options: {}
+            options: {
+              name: "[hash].[ext]"
+            }
           }
         ]
       }
@@ -73,7 +76,17 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./index.html",
-      filename: "./index.html"
+      filename: "./index.html",
+      collapseWhitespace: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      removeComments: true,
+      removeEmptyAttributes: true,
+      removeRedundantAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      useShortDoctype: true
     }),
     new webpack.ProvidePlugin({
       $: "jquery",
@@ -83,7 +96,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: devMode ? "[name].css" : "[name].[hash].css",
       chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
-    })
+    }),
+    new ProgressBarPlugin()
   ],
 
   optimization: {
