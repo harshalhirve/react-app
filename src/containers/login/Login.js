@@ -54,6 +54,7 @@ class HomeComponent extends Component {
       });
     }
   }
+  
   render() {
     const { loggedIn } = this.props;
     if (loggedIn) {
@@ -122,6 +123,7 @@ class HomeComponent extends Component {
                     type="submit"
                     disabled={this.props.loading ? true : false}
                     value={this.props.loading ? "Processing" : "Login"}
+                    className={styles.button}
                   />
                 </td>
               </tr>
