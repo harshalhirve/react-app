@@ -5,8 +5,8 @@
   "main": "babel.config.js",
   "private": true,
   "scripts": {
-    "start": "rimraf dist && webpack-dev-server --mode development --hot --open",
-    "build": "SET NODE_ENV=production && rimraf dist && webpack --config ./config/webpack.prod.js --mode production"
+    "start": "rimraf dist && webpack-dev-server --hot --open",
+    "build": "rimraf dist && webpack --config ./config/webpack.prod.js"
   },
   "keywords": [],
   "author": "harshal s hirve",
