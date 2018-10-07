@@ -41,7 +41,7 @@ module.exports = webpackMerge(commonConfig, {
             removeAll: true
           }
         },
-        canPrint: true,        
+        canPrint: true,
         mangle: true,
         beautify: false,
         comments: false,
