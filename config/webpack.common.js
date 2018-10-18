@@ -78,16 +78,6 @@ module.exports = {
     ]
   },
 
-  performance: {
-    hints: "warning"
-  },
-
-  optimization: {
-    splitChunks: {
-      chunks: "all"
-    }
-  },
-
   plugins: [
     new HtmlWebpackPlugin({
       title: "Demo React Redux App",

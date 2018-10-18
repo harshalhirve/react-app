@@ -18,29 +18,36 @@ module.exports = webpackMerge(commonConfig, {
     chunkFilename: "[name].[chunkhash].js"
   },
   optimization: {
-    // splitChunks: {
-    //   chunks: "async",
-    //   minSize: 240000,
-    //   maxSize: 0,
-    //   minChunks: 1,
-    //   maxAsyncRequests: 5,
-    //   maxInitialRequests: 3,
-    //   automaticNameDelimiter: "~",
-    //   name: true,
-    //   cacheGroups: {
-    //     vendors: {
-    //       test: /[\\/]node_modules[\\/]/,
-    //       name: "vendors",
-    //       priority: -10,
-    //       reuseExistingChunk: true
-    //     },
-    //     default: {
-    //       minChunks: 2,
-    //       priority: -20,
-    //       reuseExistingChunk: true
-    //     }
-    //   }
-    // },
+    splitChunks: {
+      chunks: "async",
+      minSize: 240000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: "~",
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          priority: -10,
+          reuseExistingChunk: true
+        },
+        styles: {
+          name: "styles",
+          test: /\.css$/,
+          chunks: "all",
+          enforce: true,
+          reuseExistingChunk: true
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    },
     minimizer: [
       new TerserPlugin({
         terserOptions: {
