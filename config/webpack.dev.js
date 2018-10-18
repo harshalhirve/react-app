@@ -33,9 +33,14 @@ module.exports = webpackMerge(commonConfig, {
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("development"),
-        WEBPACK: true
+        NODE_ENV: JSON.stringify("development")
       }
     })
-  ]
+  ],
+
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    }
+  }
 });

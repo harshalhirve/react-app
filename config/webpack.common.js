@@ -78,6 +78,16 @@ module.exports = {
     ]
   },
 
+  performance: {
+    hints: "warning"
+  },
+
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    }
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
       title: "Demo React Redux App",
@@ -93,11 +103,5 @@ module.exports = {
       chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
     }),
     new ProgressBarPlugin()
-  ],
-
-  optimization: {
-    splitChunks: {
-      chunks: "all"
-    }
-  }
+  ]
 };

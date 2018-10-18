@@ -10,25 +10,37 @@ const rootDir = path.resolve(__dirname, "..");
 
 module.exports = webpackMerge(commonConfig, {
   mode: "production",
-  bail: true,
+  devtool: "source-map",
   output: {
     path: path.resolve(rootDir, "dist"),
     publicPath: "./",
     filename: "[name].[chunkhash].js",
     chunkFilename: "[name].[chunkhash].js"
   },
-
   optimization: {
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: "styles",
-          test: /\.css$/,
-          chunks: "all",
-          enforce: true
-        }
-      }
-    },
+    // splitChunks: {
+    //   chunks: "async",
+    //   minSize: 240000,
+    //   maxSize: 0,
+    //   minChunks: 1,
+    //   maxAsyncRequests: 5,
+    //   maxInitialRequests: 3,
+    //   automaticNameDelimiter: "~",
+    //   name: true,
+    //   cacheGroups: {
+    //     vendors: {
+    //       test: /[\\/]node_modules[\\/]/,
+    //       name: "vendors",
+    //       priority: -10,
+    //       reuseExistingChunk: true
+    //     },
+    //     default: {
+    //       minChunks: 2,
+    //       priority: -20,
+    //       reuseExistingChunk: true
+    //     }
+    //   }
+    // },
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -87,12 +99,10 @@ module.exports = webpackMerge(commonConfig, {
     ],
     runtimeChunk: true
   },
-
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("production"),
-        WEBPACK: true
+        NODE_ENV: JSON.stringify("production")
       }
     })
   ]

@@ -6,3 +6,4 @@ import "redux";
 import "react-redux";
 import "redux-thunk";
 import "jquery";
+import "axios";
