@@ -1,7 +1,7 @@
 {
-  "name": "react-app",
+  "name": "react-redux-demo-app",
   "version": "1.0.0",
-  "description": "React Demo App with Webpack 4 and Babel 7",
+  "description": "React Redux Demo App with Webpack 4 and Babel 7",
   "main": "babel.config.js",
   "private": true,
   "scripts": {

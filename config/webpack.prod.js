@@ -48,11 +48,13 @@ module.exports = webpackMerge(commonConfig, {
             ecma: 5,
             comments: false,
             ascii_only: true
-          }
+          },
+          warnings: false
         },
         parallel: true,
         cache: true,
-        sourceMap: false
+        sourceMap: false,
+        extractComments: "all"
       }),
       new OptimizeCssAssetsPlugin({
         cssProcessor: require("cssnano"),
